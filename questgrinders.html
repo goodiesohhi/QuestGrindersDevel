@@ -1,0 +1,1182 @@
+<head>
+<link rel="stylesheet" href="/wbbtheme.css" />
+<link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+<meta name="google-site-verification" content="ZHEWLbI6xkFPpUKOBn8NMLYDKfB1v0rrJrOe-p5IUE4" />
+<meta name="msvalidate.01" content="6A90BAD9F72517B95F450A452D6103AA" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>QuestGrinders Idle MMO</title>
+<meta name="author" content="FoxFyre Studios">
+<meta name="keywords" content="Quests,Game, idle, mmo, grind, grinding, grinders">
+<meta name="description" content="QuestGrinders is a mmo idle game with rpg elements. The game is in early alpha with many features being planned.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" href="/1.png">
+<meta name="seoreporters-verification" content="70733b45476ad7fa19d0cb5d167f1d03" />
+<link rel="apple-touch-icon" sizes="76x76" href="/76.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/152.png">
+<link rel="apple-touch-startup-image" href="/startup.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+
+<body style="padding-top: 120px">
+
+    <p2 align="right">
+
+
+
+
+
+  <noscript>This site requires javascript to be enabled</noscript>
+
+
+
+    </p2>
+
+
+{{>navbar}}
+
+</body>
+
+
+
+<template name="ads">
+
+<div align= "center" class="hide2">
+
+None!
+
+</div>
+
+
+</template>
+
+<template name="bbcodeeditor">
+ <input align="center" type="submit" id="submit"/>
+<textarea id="editor"></textarea>
+</template>
+
+<template name="navbar">
+<nav class="nav" id="navigation">
+	  <nav class="navbar navbar-default navbar-fixed-top">
+	    <div class="container-fluid">
+	      <!-- Brand and toggle get grouped for better mobile display -->
+	      <div class="navbar-header">
+	        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topFixedNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+	        <a class = "navbar-brand" href="/base"><img src="/logo.png"></a></div>
+	      <!-- Collect the nav links, forms, and other content for toggling -->
+	      <div class="collapse navbar-collapse" id="topFixedNavbar1">
+	        <ul class="nav navbar-nav">
+              <li class="active"><a href="/login">Login<span class="sr-only">(current)</span></a></li>
+	          <li class="active"><a href="/base">Your Base<span class="sr-only">(current)</span></a></li>
+	          <li class="active"><a href="/leaderboard">The Leaderboards<span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/chat">In-Game Chat<span class="sr-only">(current)</span></a></li>
+		<li class="active"> <a href="/ticksystem">{{>tickbox}} <span class="sr-only">(current)</span></a></li>
+	        </ul>
+
+
+          </div>
+	      <!-- /.navbar-collapse -->
+        </div>
+	    <!-- /.container-fluid -->
+</nav>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</template>
+<template name="home">
+  <div class="status4">
+  <h1>
+    QuestGrinders is a mmo idle game with rpg elements..
+  </h1>
+  <h2>
+    We are a small group so even though many features are being planned, we will roll these updates out slowly.
+
+
+    To play this game, you need to register for an account using the dashboard on the right. You can also give the game a try before registering using the demo account <br> Username: the quest Password: thequest
+  </h2>
+</div>
+
+</template>
+
+<template name="champstore">
+</template>
+
+<template name="online">
+
+  <div class="right">
+      <a href="/questleader"><img src="/quest.png"></a>
+
+  </div>
+
+  <div class="leader">
+
+    <h5 align="center">
+      {{playernumber}} Player Online<br>
+      These players are currently logged on.
+  <table class="leaderboard table">
+    <thead>
+      <th>Username</th> <th>View Profile</th>
+    </thead>
+
+    <tbody>
+      {{#each players}}
+        {{> onlineplayer}}
+      {{/each}}
+    </tbody>
+  </table>
+</h5>
+  </div>
+
+</template>
+
+<template name="onlineplayer">
+
+
+  <tr class="player">
+    <td class="name">   <a href="/profile/{{username}}">{{username}} {{cheat}} </a> <a href="/profile/{{username}}"> {{> avatar user=this shape="rounded" size="mysize"}}</a></td>
+
+
+<td class="View profile">
+
+  <a href="/profile/{{username}}">Profile</a>
+
+  </td>
+
+
+  </tr>
+
+</template>
+
+
+
+<template name="leaderboards">
+
+  <div class="right">
+      <a href="/questleader"><img src="/quest.png"></a>
+      <a href="/online"><img src="/online.png"></a>
+  </div>
+
+  <div class="leader">
+
+    <h5 align="center">
+      {{playernumber}} Accounts registered.
+
+  <table class="leaderboard table">
+    <thead>
+      <th>Username</th> <th>Status</th><th> Heroes </th>
+    </thead>
+
+
+
+
+
+    <tbody>
+      {{#each players}}
+        {{> player}}
+      {{/each}}
+    </tbody>
+  </table>
+</h5>
+  </div>
+
+</template>
+
+<template name="statusshow">
+  <div class="status2">
+  {{status3}}
+</div>
+</template>
+<template name="player">
+
+
+  <tr class="player">
+    <td class="name">   <a href="/profile/{{username}}">{{username}} {{cheat}} </a> <a href="/profile/{{username}}"> {{> avatar user=this shape="rounded" size="mysize"}}</a></td>
+    <td class="Status">
+
+        {{>statusshow}}
+
+
+
+</td>
+
+
+
+
+
+
+
+
+
+  </tr>
+
+</template>
+
+<template name="chat">
+
+    <div class="low">
+<div id="disqus_thread"></div>
+
+    </div>
+
+
+</template>
+
+
+
+
+<template name ="tickbox">
+
+Cycle:{{keeper.cycle}} Tick:{{keeper.tick}}
+
+</template>
+
+<template name="game">
+  <div align="center" id="gamediv">
+
+  </div>
+</template>
+<template name="leaderboard">
+
+
+
+
+<div class="base">
+
+  <p align="center">
+
+  {{#basicTabs  tabs=base}}
+
+    {{#tabContent slug="quest"}}
+
+   <div class="basetext">
+    You ({{user.username}}) have {{formatCurrency user.money}} gold and {{formatCurrency user.lifetimeclick}} total clicks.
+
+    <br> Click to earn money.
+
+  </div>
+
+
+
+    <div class="details2">
+      <img id="heroimg" src="/frame1.png">
+    </div>
+
+    {{/tabContent}}
+
+    {{#tabContent slug="map"}}
+
+{{>map}}
+
+    {{/tabContent}}
+
+    {{#tabContent slug="profile"}}
+	{{>myProfile}}
+
+    {{/tabContent}}
+
+
+
+  {{/basicTabs}}
+    <br> <br>
+
+  </p>
+
+
+</div>
+
+
+
+
+</template>
+
+
+<template name="start">
+
+{{#if currentUser}}
+  {{> leaderboard}}
+  {{else}}
+  {{> home}}
+  {{/if}}
+</template>
+
+
+<template name="smalldash">
+
+  <div class="smalldash">
+  <div class="status2">
+
+    <h3 align="center">
+
+
+<a href="/login"> <img src="/store.png"></a><br>
+
+<div class="status2">
+  <a href="/base"> <img src="/base.png"></a><br>
+
+
+  <a href="/store"> <img src="/store2.png"></a><br>
+
+  <a href="/leaderboard"> <img src="/leaderboard.png"></a><br>
+
+  <a href="/myprofile"> <img src="/profile.png"></a><br>
+
+
+
+
+
+</div>
+
+
+<br>
+</h3>
+  </div>
+</div>
+
+</template>
+
+<template name="dash">
+
+
+
+
+</template>
+
+<template name="help">
+
+
+  <p align="center">
+    Help Pages:
+    </p>
+      <p align="center">
+
+        <div class="helpbutton">
+  <div class="btn-group">
+
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+       </button>
+          <ul class="dropdown-menu" role="menu">
+
+
+        <li><a href="/infopages"> Info Pages</a></li>
+        <li><a href="http://quest-grinders.wikia.com/wiki/"> Wiki </a></li>
+        <li><a href="http://foxfyre.boards.net"> Forums </a></li>
+
+      </ul>
+
+    </div>
+  </div>
+    </p>
+
+</template>
+
+<template name="contact">
+
+
+  <p align="center">
+    <div class="contact">
+    YOU MAY SEND YOUR COMPLAINTS HERE:
+    <br>
+    <br>
+    <br>
+    <a href="https://plus.google.com/communities/115745964315664722173">GPLUS</a> </div></p> <div class="contact">
+  <br>
+  Email: 001.foxfyre@gmail.com
+  <br>
+  If I find that you are spamming us.. I will find you and bad stuff will happen.
+
+</div>
+</template>
+
+<template name="logo">
+
+
+</template>
+
+<template name="moon">
+
+  <div class="moon">
+    <P6 align="rightmargin">
+
+      <a href="/lore"><img src="/moon2.gif"></a><br>
+      The moon is deactivated.. Has been for a long time.. You hope it doesn't turn on again
+    </p6>
+  </div>
+
+</template>
+
+
+
+
+
+<template name="lore">
+
+  <div class="moon">
+    <p align="center">
+      <a href="http://gq.thecomicseries.com/"><img src="/lore1.gif"></a>
+    </p>
+  </div>
+
+</template>
+
+<template name="store" >
+  <div class="jack" align ="center">
+      <a href="/jack"><img src="/shack.png"></a>
+  </div>
+
+<div class="base" align ="center">
+
+
+
+    You have g{{formatCurrency user.money}} <br>
+
+
+
+  {{#basicTabs  tabs=tabs}}
+
+    {{#tabContent slug="click"}}
+      <h2>Click Boosts</h2>
+  <br>
+ <input type="image" src="/power.png" class="power btn span2" id="{{user.pcost}}" value="Hire a Hero ({{formatCurrency cost}}) gold" />  Price: g{{formatCurrency user.pcost}}
+
+
+
+
+   <input type="image" src="/mult.png" class="mult btn span2" id="{{user.wepcost}}" value="Ultima Weapon" /> Price: g{{formatCurrency user.wepcost}}
+
+    {{/tabContent}}
+
+    {{#tabContent slug="hero"}}
+      <h2>Heroes</h2><br>
+     <input type="image" src="/hero.png" class="buy btn span2" id="{{user.cost}}" value="Hire a Hero ({{formatCurrency cost}}) gold" />Price: g{{formatCurrency user.cost}}
+
+    <input type="image" src="/hpower.png" class="hpowerup btn span2" id="{{user.hpowercost}}" value="Hero Power" /> Price: g{{formatCurrency user.hpowercost}}
+
+    {{/tabContent}}
+
+    {{#tabContent slug="archer"}}
+      <h2>Archers</h2> <br>
+
+  <input type="image" src="/archer.png" class="buya btn span2" id="{{user.archerprice}}" value="Hire an Archer ({{formatCurrency archerprice}}) gold" />  Price: g{{formatCurrency user.archerprice}}
+<input type="image" src="/apower.png" class="apower btn span2" id="{{user.archerpcost}}" value="Archer Power" /> Price: g{{formatCurrency user.archerpcost}}
+    {{/tabContent}}
+
+ {{#tabContent slug="mage"}}
+      <h2>Mages</h2> <br>
+      <input type="image" src="/mage.png" class="buym btn span2" id="{{user.mageprice}}" value="Hire an Archer ({{formatCurrency mageprice}}) gold" />  Hire Price: g{{formatCurrency user.mageprice}}
+    {{/tabContent}}
+
+
+  {{/basicTabs}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</template>
+
+
+
+
+<template name="no">
+  <div class ="no">
+  YOUR SCREEN IS TOO SMALL TO DISPLAY THIS PAGE.<br>
+  WHILE THE MOBILE VERSION IS GREAT FOR CLICKING AND BUYING MORE QUESTERS,<br> SOME ELEMENTS WILL NOT DISPLAY PROPERLY SUCH AS THE LEADERBOARD....<br> WE WILL TRY TO GET THIS WORKING SOON
+</div>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template name="jack">
+
+  <p align="center">
+    <img src="/jack.png">
+
+  </p>
+
+</template>
+
+
+
+<template name="adventure">
+
+  <p align="center">
+    YOU HAVE {{formatCurrency user.adv}} ADVENTURES LEFT.
+    <br>
+
+    <input type="image" src="/adventure.png" class="adv btn span4" value="GO ADVENTURE!" />
+
+  </p>
+
+</template>
+
+<template name="adv">
+
+  <p align="center">
+
+    TEST
+
+
+
+  </p>
+
+</template>
+
+<template name="cheat">
+
+  <p>
+    CLICK TO CHEAT!
+  </p>
+  <input type="image" src="/goodiesohhi.png" class="cheat btn span4" value="GO ADVENTURE!" />
+</template>
+
+<template name="chat2">
+  <iframe src="http://quest-grinders.wikia.com/wiki/Special:Chat"></iframe>
+</template>
+
+<template name="stats">
+
+
+
+  <p align="center">
+    ({{user.username}})
+    <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+       </button>
+          <ul class="dropdown-menu" role="menu">
+            <li>GOLD = {{formatCurrency user.money}}</li>
+
+           <li>Heroes = {{formatCurrency user.rate}}</li>
+
+        <li>Click Power = {{formatCurrency user.power}}</li>
+        <li>Click Multiplier = {{formatCurrency user.mult}}</li>
+        <li>Hero Multiplier = {{formatCurrency user.heropower}}</li>
+      </ul>
+    </div>
+
+  </p>
+
+
+
+
+
+</template>
+
+<template name="map">
+
+
+
+    <div class="map2">
+        <p align="center">
+<img id="Image-Maps-Com-image-maps-2016-01-17-150751" src="/map.png" border="0" width="700" height="640" orgWidth="700" orgHeight="640" usemap="#image-maps-2016-01-17-150751" alt="" />
+<map name="image-maps-2016-01-17-150751" id="ImageMapsCom-image-maps-2016-01-17-150751">
+  <area alt="" title="" href="/minigames" shape="rect" coords="70,23,221,186" style="outline:none;" target="_self" />
+  <area alt="" title="" href="/city" shape="rect" coords="246,208,424,426" style="outline:none;" target="_self" />
+  <area alt="" title="" href="/lib" shape="rect" coords="41,369,208,559" style="outline:none;" target="_self" />
+  <area shape="rect" coords="698,638,700,640" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+  <area alt="" title="" href="/moon" shape="poly" coords="426,137,468,133,475,42,568,34,610,41,614,77,608,115,608,135,670,166,656,148,661,174,648,145,650,169,431,171" style="outline:none;" target="_self" />
+  <area alt="" title="" href="/store" shape="poly" coords="483,350,559,307,650,335,656,421,631,453,633,495,489,509,480,508,621,507,633,509,635,503,475,498,474,506,487,504,466,508" style="outline:none;" target="_self" />
+</map>
+
+</p>
+</div>
+
+
+</template>
+
+<template name="minigames">
+
+<div class="status10">
+
+
+     <a href="/index.html">The Useless Game</a><br><br>
+ <a href="/htgflash.swf">Hate The Game</a><br><br>
+ <a href="/m8nin8tor2.swf">M9nin8or Easy Mode</a><br><br>
+   <a href="/M92.swf">M9nin8or</a><br><br>
+
+  <a href="/Depressing Text- The game.html">Depressing Text- The game.html</a> <br>
+  Non Foxfyre Minigames (Games I like)<br><br>
+   <a href="https://www.coinbrawl.com/?ref=75964"><img src="https://www.coinbrawl.com/assets/banners/468x60-3a55a23096d0be7245cbf1d7f84f6ef0.png"></a><br><br>
+   <a href="http://goodiesohhi.minitroopers.com"><img src="http://the-party-loving.minitroopers.com/img/fb/minitroopers.png"></a><br><br>
+</div>
+
+</template>
+
+
+<template name="info">
+
+
+  <div class="info">
+  <p align="center"> <br>
+    INFO <br>
+  </p>
+
+
+
+
+
+
+      Hero <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+               </button>
+                  <ul class="dropdown-menu" role="menu">
+                  Generates Gold... Will work for gold.... SO HIRE HIM! (BTW... DON'T TELL HIM THAT HE CAN MAKE MONEY WITHOUT YOU... Even though it's true..)
+                  </ul>
+                </div> <br><br>
+
+                Jack <div class="btn-group">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                         </button>
+                            <ul class="dropdown-menu" role="menu">
+                              A very powerful and mysterious being... You've known him for years... Owns QuestCo.
+                            </ul>
+                          </div>
+                          <br>
+<br>
+
+
+            Jack's Shack  <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                     </button>
+                        <ul class="dropdown-menu" role="menu">
+                          Way out in extradimensional space.... Jack's Quest Shack is a branch of QuestCo. that contains everything you need to quest!
+                        </ul>
+                      </div>
+                      <br><br>
+
+
+                      PowerAga  <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              <span class="caret"></span>
+                               </button>
+                                  <ul class="dropdown-menu" role="menu">
+                                    Makes you feel way stronger (ADDS 5 to click power every purchase)... Made by QuestCo. Don't question it.
+                                  </ul>
+                                </div>
+                                <br><br>
+
+                                Ultima Weapon  <div class="btn-group">
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                         </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                            SUPER EXPENSIVE.. (ADDS TO YOUR CLICKING POWER MULTIPLIER)
+                                            </ul>
+                                          </div>
+                                          <br><br>
+
+
+                                          Gun  <div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                  <span class="caret"></span>
+                                                   </button>
+                                                      <ul class="dropdown-menu" role="menu">
+                                                      STANDARD QuestCo. questing rifle. Buying this will add 1 to the hero's multiplier.
+                                                      </ul>
+                                                    </div>
+                                                    <br><br>
+
+
+
+
+
+</div>
+</template>
+
+
+<template name="questleader">
+
+
+
+    <div class="leader">
+
+      <h5 align="center">
+    <table class="leaderboard table">
+      <thead>
+        <th>Username</th> <th>Status</th><th>Quest Progress</th> <th>View Profile</th>
+      </thead>
+
+      <tbody>
+        {{#each players}}
+          {{> player2}}
+        {{/each}}
+      </tbody>
+    </table>
+  </h5>
+    </div>
+
+
+</template>
+
+<template name="player2">
+
+
+  <tr class="player">
+    <td class="name">{{username}} {{cheat}} </td>
+    <td class="Status">
+      <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+         </button>
+
+         <div class="dropdown-menu" role="menu">
+
+          {{username}} says: {{>statusshow}}
+
+       </div>
+       </div>
+
+
+
+    </td>
+<td class = "Quest Progress">
+
+            PROGRESS = {{formatCurrency progress}}
+
+
+    </td>
+<td class="View profile">
+
+  <a href="/profile/{{username}}">Profile</a>
+
+  </td>
+
+
+
+
+  </tr>
+
+</template>
+
+
+<template name="needlogin">
+
+
+
+
+  <p align="center">
+    <h1>
+    {{#if currentUser}}
+      {{> leaderboard}}
+      {{else}}
+     <iframe  width="900" height="700" src="./QGIntro.html"></iframe>
+      {{/if}}
+
+</h1>
+  </p>
+
+
+</template>
+
+
+<template name="login">
+  <p align ="center">
+    <h4>
+<div class="status2">
+  {{>loginButtons}}
+</div>
+</h4>
+</p>
+</template>
+
+
+
+<template name="lib">
+
+
+  <p align="center">
+
+    <img id="Image-Maps-Com-image-maps-2016-01-19-181059" src="/lib.png" border="0" width="800" height="600" orgWidth="800" orgHeight="600" usemap="#image-maps-2016-01-19-181059" alt="" />
+  <map name="image-maps-2016-01-19-181059" id="ImageMapsCom-image-maps-2016-01-19-181059">
+  <area  alt="help" title="help" href="/help" shape="rect" coords="519,322,752,571" style="outline:none;" target="_self"     />
+  <area shape="rect" coords="798,598,800,600" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+  <area  alt="Books" title="Books" href="/infopages" shape="poly" coords="13,72,16,458,335,372,318,32" style="outline:none;" target="_self"     />
+  <area  alt="Comics" title="Comics" href="http://gq.thecomicseries.com/" shape="poly" coords="498,8,326,31,342,368,498,324,510,327" style="outline:none;" target="_self"     />
+  </map>
+
+
+  </p>
+</template>
+
+<template name="city">
+
+
+  <p align="center">
+
+    <img id="Image-Maps-Com-image-maps-2016-01-19-181453" src="/city.png" border="0" width="800" height="600" orgWidth="800" orgHeight="600" usemap="#image-maps-2016-01-19-181453" alt="" />
+    <map name="image-maps-2016-01-19-181453" id="ImageMapsCom-image-maps-2016-01-19-181453">
+    <area  alt="" title="" href="/quest" shape="rect" coords="316,41,501,437" style="outline:none;" target="_self"     />
+    <area  alt="" title="" href="/quest" shape="rect" coords="65,317,213,432" style="outline:none;" target="_self"     />
+    <area  alt="" title="" href="/quest" shape="rect" coords="585,248,766,429" style="outline:none;" target="_self"     />
+    <area shape="rect" coords="798,598,800,600" alt="Image Map" style="outline:none;" title="Image Map" href="http://www.image-maps.com/index.php?aff=mapped_users_0" />
+    </map>
+  </p>
+
+</template>
+
+<template name="construct">
+  <p align="center">
+
+  <a href="/city"><img src="/construct.png"></a>
+</p>
+
+
+
+
+
+
+</template>
+
+<template name="dataNotFound">
+  <p align="center">
+
+  <a href="/leaderboard"><img src="/usernotfound.png"></a>
+</p>
+
+</template>
+
+<template name="loading">
+  <p align="center">
+    LOADING.....
+  </p>
+</template>
+
+<template name="profile">
+<div class="prof status rightprof">
+
+<div id="viewbbcode">
+</div>
+</div>
+<div align="left" class="prof">
+
+      <div class="status">
+        <br>
+        {{> avatar user=this shape="rounded" size="large"}}<br>
+    Username: {{username}} <br><br>
+    Title: {{cheat}}  <br><br>
+</div>
+  <div class="status">
+    <br>
+   <div class="hide">
+        Current Status: <br><br>
+
+        <div class="status">
+          <div class="text">
+            {{status3}}
+          </div>
+            </div>
+        </div>
+
+    <br><br>
+
+    Exp: {{exp}} <br><br>
+
+    GOLD = {{formatCurrency money}} <br><br>
+
+   Heroes = {{formatCurrency rate}} <br><br>
+   Archers = {{formatCurrency archer}} <br><br>
+   Mages = {{formatCurrency mage}} <br><br>
+   Spies = {{formatCurrency spy}}<br><br>
+   Click Power = {{formatCurrency power}}<br><br>
+   Click Multiplier = {{formatCurrency mult}}<br><br>
+   Hero Multiplier = {{formatCurrency heropower}}<br><br>
+   Lifetime Clicks = {{formatCurrency lifetimeclick}}<br><br>
+   {{meme}}
+   </div>
+
+</div>
+
+
+
+
+</template>
+
+
+<template name="reward">
+<p align="center">
+
+
+  <input type="button" class="win btn span2" value="Get your reward" />
+</p>
+
+</template>
+
+<template name="new">
+
+  <div class="push">
+    <p align="center">
+      <div class="status">
+
+
+WHAT'S NEW:<br>
+Reset Power and made it scale cheaper.. GET CLICKING!
+<a href="/PWNED.html">SOMETHING</a><br>
+SHOWDOWN SERVER<br>
+In-game chat,<br>
+
+
+QUESTS!<br>
+Visit the Questco HeadQuarters to see <br>
+TBA:<br>
+PETS!<br>
+
+
+
+
+    </div>
+    </p>
+  </div>
+
+
+</template>
+
+<template name="keeper">
+
+
+</template>
+<template name="quest">
+  <div class="prof">
+    <p align="center">
+      <div class="status">
+<div class="text">
+
+        The Current quest is: {{keeper.quest}} <br>
+        Progress: {{keeper.progress}} <br>
+        Progress required by deadline: {{keeper.questcomplete}} <br>
+        Deadline: April. 10th 2016 <br>
+        Your contribution: {{user.progress}}
+
+
+
+      </div>
+    </div>
+    </p>
+  </div>
+
+</template>
+
+<template name="myProfile">
+<div class="base rightprof status">
+{{>bbcodeeditor}}
+</div> <div class="prof smaller">
+<div align="left" class = "base">
+
+
+
+            {{> avatar user=this shape="rounded" size="large"}}<br>
+    Username: {{user.username}} <br><br>
+      Title: {{user.cheat}}  <br><br>
+
+
+
+    Current Status: <br> <br>
+
+
+        {{user.status3}}
+
+<br><br>
+Update status below: <br>
+    {{>status}}<br>
+    Avatar URL: <br>
+    {{>avatar2}}<br><br>
+    GameJolt Account Link:
+    {{>gamejolt}}
+
+    Exp: {{user.exp}} <br><br>
+
+    GOLD = {{formatCurrency user.money}} <br><br>
+
+   Heroes = {{formatCurrency user.rate}} <br><br>
+   Archers = {{formatCurrency user.archer}} <br><br>
+   Mages = {{formatCurrency user.mage}} <br><br>
+   Spies = {{formatCurrency user.spy}}<br><br>
+   Click Power = {{formatCurrency user.power}}<br><br>
+   Click Multiplier = {{formatCurrency user.mult}}<br><br>
+   Hero Multiplier = {{formatCurrency user.heropower}}<br><br>
+   Lifetime Clicks = {{formatCurrency user.lifetimeclick}}<br><br>
+   Attacks Remaining = {{ user.attacks}}<br><br>
+
+
+</div>
+</div>
+
+
+
+</template>
+
+<template name="pvp">
+  <form id="status">
+       <input id="victim" type="text" name="victim"/>
+       <input type="submit" id="submit"/>
+
+</form>
+</template>
+
+<template name="yesspyshop">
+
+<a href="/spyshop">LOL</a>
+
+</template>
+
+<template name="nospyshop">
+
+
+You do not have access to spy shop.
+
+</template>
+
+<template name="status">
+  <form id="status">
+       <input id="status" type="text" name="status"/>
+       <input type="submit" id="submit"/>
+
+</form>
+
+</template>
+
+<template name="avatar2">
+  <form id="status">
+       <input id="avatar" type="text" name="avatar"/>
+       <input type="submit" id="submit"/>
+
+</form>
+
+
+</template>
+<template name="gamejolt">
+  <form id="gamejolt">
+    Gamejolt Username:
+       <input id="g1" type="text" name="g1"/>
+    Gamejolt Token (Not password):
+       <input id="g2" type="text" name="g2"/>
+       <input type="submit" id="submit"/>
+
+</form>
+
+
+</template>
+
+<template name="searchBox">
+  <div class="derp">
+  {{> EasySearch.Input index=playersIndex }}
+
+  <ul>
+      {{#EasySearch.Each index=playersIndex }}
+          <th>Username</th> <th>Status</th><th>View stats</th> <th>View Profile</th>
+      {{/EasySearch.Each}}
+  </ul>
+</div>
+</template>
+
+
+<template name="search">
+{{> searchBox}}
+<div class="leader">
+
+  <h5 align="center">
+<table class="leaderboard table">
+  <thead>
+
+  </thead>
+
+  <tbody>
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </tbody>
+</table>
+</h5>
+</div>
+
+</template>
+
+
+
+
+
+
+<template name="spyshop">
+  <input type="button" class="spy btn span2" value="Spy Shop (100 heroes or above)" />
+
+  <div class="white">
+
+
+    <p align="center">
+      <a href="/jack"><img src="/shack.png"></a>
+
+      You have g{{formatCurrency user.money}} <br><br>
+
+    Amount of money required to train a spy is: g{{formatCurrency user.spycost}}<br><br>
+
+ <input type="image" src="/spy.png" class="buyspy btn span4" id="{{user.spycost}}" value="Derp" />
+ </p>
+
+
+
+  </div>
+
+
+</template>
+
+
+<template name="donate">
+  <div class="donatenow">
+  <div class="donate">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="9NQ5B4N6ZK6RS">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+  </div>
+</div>
+
+</template>

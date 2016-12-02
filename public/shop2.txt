@@ -1,0 +1,3 @@
+  <input type="image" src="/hero.png" class="buy btn span2" id="{{user.cost}}" value="Hire a Hero ({{formatCurrency cost}}) gold" />Price: g{{formatCurrency user.cost}}
+
+    <input type="image" src="/hpower.png" class="hpowerup btn span2" id="{{user.hpowercost}}" value="Hero Power" /> Price: g{{formatCurrency user.hpowercost}} 

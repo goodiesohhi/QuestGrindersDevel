@@ -1,0 +1,9 @@
+ <input type="image" src="/power.png" class="power btn span2" id="{{user.pcost}}" value="Hire a Hero ({{formatCurrency cost}}) gold" />  Price: g{{formatCurrency user.pcost}}
+
+
+
+
+   <input type="image" src="/mult.png" class="mult btn span2" id="{{user.wepcost}}" value="Ultima Weapon" /> Price: g{{formatCurrency user.wepcost}} </li>
+
+  </div>
+</div>
