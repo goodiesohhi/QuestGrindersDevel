@@ -431,8 +431,8 @@ var map =  {
 
         game.physics.arcade.gravity.y = 250;
 
-        player = game.add.sprite(589, 32, 'dude');
-        shack = game.add.sprite(589, 10, 'shack');
+        player = game.add.sprite(20, 32, 'dude');
+        shack = game.add.sprite(30, 10, 'shack');
         game.physics.enable(player, Phaser.Physics.ARCADE);
 
         player.body.bounce.y = 0.2;
@@ -472,7 +472,7 @@ var map =  {
                 facing = 'right';
             }
         }
-	else if (cursors.up.isDown && game.physics.arcade.overlap(this.player, this.shack) )
+	else if (cursors.up.isDown && game.physics.arcade.overlap(player, shack) )
         {
 
 
