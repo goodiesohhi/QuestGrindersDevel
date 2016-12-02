@@ -1,14 +1,5 @@
 
-var map = 	 {
-
-
-    function: preload() {
-
-        game.load.image('dude', '/hero.png');
-        game.load.image('background', '/background.jpg');
-        game.load.image('shack', '/assets/shack.png');
-
-    }
+var map =  {
 
     var player;
     var facing = 'left';
@@ -17,7 +8,16 @@ var map = 	 {
     var jumpButton;
     var bg;
 
-    function: create() {
+    preload: function() {
+
+        game.load.image('dude', '/hero.png');
+        game.load.image('background', '/background.jpg');
+        game.load.image('shack', '/assets/shack.png');
+
+    },
+
+
+    create: function() {
        game.world.setBounds(0, 0, 1920, 600);
          game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -42,7 +42,7 @@ var map = 	 {
       game.camera.follow(player);
     }
 
-    function: update() {
+    update:  function() {
 
         // game.physics.arcade.collide(player, layer);
 
@@ -102,7 +102,7 @@ var map = 	 {
 
     }
 
-    function: render () {
+    render:  function() {
 
         game.debug.text(game.time.suggestedFps, 32, 32);
 
