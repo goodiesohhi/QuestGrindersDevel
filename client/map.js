@@ -2,7 +2,7 @@
 var map = 	 {
 
 
-    function preload() {
+    function: preload() {
 
         game.load.image('dude', '/hero.png');
         game.load.image('background', '/background.jpg');
@@ -17,7 +17,7 @@ var map = 	 {
     var jumpButton;
     var bg;
 
-    function create() {
+    function: create() {
        game.world.setBounds(0, 0, 1920, 600);
          game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -42,7 +42,7 @@ var map = 	 {
       game.camera.follow(player);
     }
 
-    function update() {
+    function: update() {
 
         // game.physics.arcade.collide(player, layer);
 
@@ -102,7 +102,7 @@ var map = 	 {
 
     }
 
-    function render () {
+    function: render () {
 
         game.debug.text(game.time.suggestedFps, 32, 32);
 
