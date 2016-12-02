@@ -1,12 +1,12 @@
-
-var map =  {
-
     var player;
     var facing = 'left';
     var jumpTimer = 0;
     var cursors;
     var jumpButton;
     var bg;
+var map =  {
+
+
 
     preload: function() {
 
