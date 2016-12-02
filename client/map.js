@@ -35,7 +35,7 @@ var map =  {
         cursors = game.input.keyboard.createCursorKeys();
         jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       game.camera.follow(player);
-    }
+    },
 
     update:  function() {
 
@@ -95,7 +95,7 @@ var map =  {
             jumpTimer = game.time.now + 750;
         }
 
-    }
+    },
 
     render:  function() {
 
@@ -111,5 +111,5 @@ var map =  {
 
 
 
-    }
+    },
 }
