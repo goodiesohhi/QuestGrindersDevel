@@ -585,11 +585,12 @@ var map =  {
                 facing = 'right';
             }
         }
-	else if (cursors.up.isDown && game.physics.arcade.overlap(player, shack) )
+	else if (cursors.up.isDown)
         {
-
+              if (game.physics.arcade.overlap(player, shack)) {
 
                game.state.start('Fields');
+}
 
         }
         else
