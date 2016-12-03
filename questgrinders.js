@@ -545,7 +545,7 @@ var map =  {
         game.physics.arcade.gravity.y = 250;
 
         player = game.add.sprite(20, 32, 'dude');
-        shack = game.add.sprite(30, 1850, 'shack');
+        shack = game.add.sprite(30, 550, 'shack');
         game.physics.enable(player, Phaser.Physics.ARCADE);
 
         player.body.bounce.y = 0.2;
@@ -589,7 +589,7 @@ var map =  {
         {
 
 
-               game.state.start('Map');
+               game.state.start('Fields');
 
         }
         else
