@@ -433,22 +433,22 @@ particleBurst: function(pointer) {
     emitter.start(true, 2000, null, 10);
 Meteor.call('click');
 
-}
+},
     create: function() {
    game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    
+
 game.stage.backgroundColor = 0x337799;
 
-    
+
 emitter = game.add.emitter(0, 0, 100);
 
-    
+
 emitter.makeParticles('gold');
-    
+
 emitter.gravity = 200;
 
-    
+
 game.input.onDown.add(particleBurst, this);
        game.world.setBounds(0, 0, 1920, 600);
          game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -461,7 +461,7 @@ game.input.onDown.add(particleBurst, this);
 
         player = game.add.sprite(20, 32, 'dude');
  shack = game.add.sprite(20, 32, 'dude');
-        
+
         game.physics.enable(player, Phaser.Physics.ARCADE);
 
         player.body.bounce.y = 0.2;
