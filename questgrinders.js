@@ -474,7 +474,7 @@ Template.store.helpers({
 
                game.time.desiredFps = 30;
 
-               bg = game.add.tileSprite(0, 0, 800, 600, 'background');
+              
 
                game.physics.arcade.gravity.y = 250;
 
