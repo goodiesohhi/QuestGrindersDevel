@@ -462,20 +462,7 @@ game.input.onDown.add(particleBurst, this);
     },
 
 
-particleBurst: function (pointer) {
 
-    //  Position the emitter where the mouse/touch event was
-    emitter.x = pointer.x;
-    emitter.y = pointer.y;
-
-    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
-    //  The second gives each particle a 2000ms lifespan
-    //  The third is ignored when using burst/explode mode
-    //  The final parameter (10) is how many particles will be emitted in this single burst
-    emitter.start(true, 2000, null, 10);
-Meteor.call('click');
-
-},
 
     update:  function() {
 
@@ -554,6 +541,20 @@ Meteor.call('click');
     },
 }
 
+function particleBurst(pointer) {
+
+    //  Position the emitter where the mouse/touch event was
+    emitter.x = pointer.x;
+    emitter.y = pointer.y;
+
+    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+    //  The second gives each particle a 2000ms lifespan
+    //  The third is ignored when using burst/explode mode
+    //  The final parameter (10) is how many particles will be emitted in this single burst
+    emitter.start(true, 2000, null, 10);
+Meteor.call('click');
+
+},
 var map =  {
 
     preload: function() {
@@ -617,14 +618,7 @@ var map =  {
  game.state.start('Fields');
             }
         }
-	else if (cursors.up.isDown)
-        {
-              if (game.physics.arcade.overlap(player, shack)) {
 
-               game.state.start('Fields');
-}
-
-        }
         else
         {
             if (facing != 'idle')
@@ -649,6 +643,33 @@ var map =  {
             player.body.velocity.y = -250;
             jumpTimer = game.time.now + 750;
         }
+
+        else if (cursors.up.isDown)
+              {
+                    if (game.physics.arcade.overlap(player, shack)) {
+
+                     game.state.start('Fields');
+      }
+
+              }
+              else
+              {
+                  if (facing != 'idle')
+                  {
+                      player.animations.stop();
+
+                      if (facing == 'left')
+                      {
+                          player.frame = 0;
+                      }
+                      else
+                      {
+                          player.frame = 5;
+                      }
+
+                      facing = 'idle';
+                  }
+              }
 
     },
 
