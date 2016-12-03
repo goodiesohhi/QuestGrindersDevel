@@ -462,7 +462,7 @@ game.input.onDown.add(particleBurst, this);
     },
 
 
-function particleBurst(pointer) {
+particleBurst: function (pointer) {
 
     //  Position the emitter where the mouse/touch event was
     emitter.x = pointer.x;
