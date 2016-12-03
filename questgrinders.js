@@ -468,7 +468,7 @@ Template.store.helpers({
        emitter.gravity = 200;
 
 
-       game.input.onDown.add(particleBurst, this);
+       game.input.onDown.add(this.particleBurst, this);
               game.world.setBounds(0, 0, 1920, 600);
                 game.physics.startSystem(Phaser.Physics.ARCADE);
 
