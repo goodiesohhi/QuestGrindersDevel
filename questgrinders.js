@@ -420,20 +420,6 @@ game.load.image('gold', 'assets/gold.png');
 
     },
 
-particleBurst: function(pointer) {
-
-    //  Position the emitter where the mouse/touch event was
-    emitter.x = pointer.x;
-    emitter.y = pointer.y;
-
-    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
-    //  The second gives each particle a 2000ms lifespan
-    //  The third is ignored when using burst/explode mode
-    //  The final parameter (10) is how many particles will be emitted in this single burst
-    emitter.start(true, 2000, null, 10);
-Meteor.call('click');
-
-},
     create: function() {
    game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -474,6 +460,22 @@ game.input.onDown.add(particleBurst, this);
         jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
       game.camera.follow(player);
     },
+
+
+function particleBurst(pointer) {
+
+    //  Position the emitter where the mouse/touch event was
+    emitter.x = pointer.x;
+    emitter.y = pointer.y;
+
+    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+    //  The second gives each particle a 2000ms lifespan
+    //  The third is ignored when using burst/explode mode
+    //  The final parameter (10) is how many particles will be emitted in this single burst
+    emitter.start(true, 2000, null, 10);
+Meteor.call('click');
+
+},
 
     update:  function() {
 
