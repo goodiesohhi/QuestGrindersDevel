@@ -424,7 +424,7 @@ Template.store.helpers({
            preload: function() {
 
                game.load.image('dude', '/hero.png');
-               game.load.image('background', '/fieldsback.png');
+               game.load.image('background', '/assets/fieldsback.png');
                game.load.image('shack', '/assets/shack.png');
                 game.load.image('leavesign', '/assets/leavesign.png');
        game.load.image('gold', 'assets/gold.png');
@@ -482,7 +482,7 @@ Template.store.helpers({
 
                game.time.desiredFps = 30;
 
-   leavesign.events.onInputDown.add(leave, this);
+   leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
 
@@ -623,7 +623,7 @@ Template.store.helpers({
                cursors = game.input.keyboard.createCursorKeys();
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
              game.camera.follow(player);
-             fieldsign.events.onInputDown.add(gotofields, this);
+             fieldsign.events.onInputDown.add(this.gotofields, this);
            },
 
            gotofields: function(){
