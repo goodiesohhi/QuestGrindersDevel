@@ -436,7 +436,7 @@ Template.store.helpers({
                       particleBurst: function(pointer) {
 
                           //  Position the emitter where the mouse/touch event was
-    
+
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -511,8 +511,8 @@ leavesign.inputEnabled = true;
 emitter.y = cross.y;
 
 //  Position the emitter where the mouse/touch event was
-cross.x = pointer.x;
-cross.y = pointer.y;
+cross.x = game.input.x
+cross.y = game.input.y
                // game.physics.arcade.collide(player, layer);
               gold=Meteor.user().money;
               text.setText("GOLD:" + gold+"G");
