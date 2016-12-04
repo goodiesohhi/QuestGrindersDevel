@@ -435,8 +435,7 @@ Template.store.helpers({
                       particleBurst: function(pointer) {
 
                           //  Position the emitter where the mouse/touch event was
-                          emitter.x = pointer.x;
-                          emitter.y = pointer.y;
+                          game.physics.arcade.moveToPointer(emitter, 1);
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -481,7 +480,7 @@ Template.store.helpers({
                 game.physics.startSystem(Phaser.Physics.ARCADE);
 
                game.time.desiredFps = 30;
-
+leavesign.inputEnabled = true;
    leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
@@ -623,6 +622,7 @@ Template.store.helpers({
                cursors = game.input.keyboard.createCursorKeys();
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
              game.camera.follow(player);
+             fieldsign.inputEnabled = true;
              fieldsign.events.onInputDown.add(this.gotofields, this);
            },
 
@@ -656,7 +656,7 @@ Template.store.helpers({
                    {
                        player.animations.play('right');
                        facing = 'right';
-        game.state.start('Fields');
+
                    }
                }
 
