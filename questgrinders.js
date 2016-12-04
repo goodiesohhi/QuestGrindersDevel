@@ -435,7 +435,8 @@ Template.store.helpers({
                       particleBurst: function(pointer) {
 
                           //  Position the emitter where the mouse/touch event was
-                          game.physics.arcade.moveToPointer(emitter, 1);
+                         emitter.x = pointer.x;
+   			 emitter.y = pointer.y;
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -473,7 +474,7 @@ Template.store.helpers({
        emitter.makeParticles('gold');
 
        emitter.gravity = 200;
-
+    emitter.fixedToCamera = true;
 
        game.input.onDown.add(this.particleBurst, this);
               game.world.setBounds(0, 0, 1920, 600);
