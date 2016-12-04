@@ -428,6 +428,7 @@ Template.store.helpers({
                game.load.image('shack', '/assets/shack.png');
                 game.load.image('leavesign', '/assets/leavesign.png');
        game.load.image('gold', 'assets/gold.png');
+       game.load.image('crosshair', 'assets/crosshair.png');
 
            },
 
@@ -435,8 +436,7 @@ Template.store.helpers({
                       particleBurst: function(pointer) {
 
                           //  Position the emitter where the mouse/touch event was
-                         emitter.x = pointer.x;
-   			 emitter.y = pointer.y;
+    
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -467,7 +467,7 @@ Template.store.helpers({
 
        game.stage.backgroundColor = 0x337799;
  leavesign = game.add.sprite(300, 550, 'leavesign');
-
+cross = game.add.sprite(300, 550, 'crosshair');
        emitter = game.add.emitter(0, 0, 100);
 
 
@@ -506,7 +506,13 @@ leavesign.inputEnabled = true;
 
 
            update:  function() {
+             //  Position the emitter where the mouse/touch event was
+            emitter.x = cross.x;
+emitter.y = cross.y;
 
+//  Position the emitter where the mouse/touch event was
+cross.x = pointer.x;
+cross.y = pointer.y;
                // game.physics.arcade.collide(player, layer);
               gold=Meteor.user().money;
               text.setText("GOLD:" + gold+"G");
