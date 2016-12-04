@@ -424,8 +424,9 @@ Template.store.helpers({
            preload: function() {
 
                game.load.image('dude', '/hero.png');
-               game.load.image('background', '/background.jpg');
+               game.load.image('background', '/fieldsback.png');
                game.load.image('shack', '/assets/shack.png');
+                game.load.image('leavesign', '/assets/leavesign.png');
        game.load.image('gold', 'assets/gold.png');
 
            },
@@ -446,8 +447,15 @@ Template.store.helpers({
 
                       },
 
-           create: function() {
+                    leave: function() {
 
+                            game.state.start('Map');
+
+
+                      },
+
+           create: function() {
+   bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
              text = game.add.text(500, 500, "GOLD", {
                     font: "18px Arial",
                     fill: "#ff0044",
@@ -458,7 +466,7 @@ Template.store.helpers({
 
 
        game.stage.backgroundColor = 0x337799;
-
+ leavesign = game.add.sprite(300, 550, 'leavesign');
 
        emitter = game.add.emitter(0, 0, 100);
 
@@ -474,12 +482,12 @@ Template.store.helpers({
 
                game.time.desiredFps = 30;
 
-              
+   leavesign.events.onInputDown.add(leave, this);
 
                game.physics.arcade.gravity.y = 250;
 
                player = game.add.sprite(20, 32, 'dude');
-        shack = game.add.sprite(20, 32, 'dude');
+
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
 
@@ -584,8 +592,10 @@ Template.store.helpers({
            preload: function() {
 
                game.load.image('dude', '/hero.png');
-               game.load.image('background', '/background.jpg');
+               game.load.image('background', 'assets/mapback.png');
                game.load.image('shack', '/assets/shack.png');
+               game.load.image('sign', '/assets/fieldsign.png');
+
 
            },
 
@@ -596,12 +606,12 @@ Template.store.helpers({
 
                game.time.desiredFps = 30;
 
-               bg = game.add.tileSprite(0, 0, 800, 600, 'background');
+               bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
 
                game.physics.arcade.gravity.y = 250;
 
                player = game.add.sprite(20, 32, 'dude');
-               shack = game.add.sprite(30, 550, 'shack');
+               fieldsign = game.add.sprite(300, 550, 'sign');
                game.physics.enable(player, Phaser.Physics.ARCADE);
 
                player.body.bounce.y = 0.2;
@@ -613,6 +623,13 @@ Template.store.helpers({
                cursors = game.input.keyboard.createCursorKeys();
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
              game.camera.follow(player);
+             fieldsign.events.onInputDown.add(gotofields, this);
+           },
+
+           gotofields: function(){
+
+              game.state.start('Fields');
+
            },
 
            update:  function() {
@@ -672,7 +689,7 @@ Template.store.helpers({
                      {
                            if (game.physics.arcade.overlap(player, shack)) {
 
-                            game.state.start('Fields');
+
              }
 
                      }
