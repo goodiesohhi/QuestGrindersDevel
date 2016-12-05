@@ -411,7 +411,7 @@ Template.store.helpers({
   Template.game.rendered = function(){
     if (!this.rendered) {
 
-  
+
       var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'gamediv');
        var emitter;
            var player;
@@ -424,7 +424,8 @@ Template.store.helpers({
              var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
-  var load = false;
+ var loadenabled = Meteor.user().load;
+
        var fields =  {
 
 
@@ -444,7 +445,7 @@ Template.store.helpers({
                       particleBurst: function() {
 
                           //  Position the emitter where the mouse/touch event was
-                  
+
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -483,7 +484,7 @@ emitter = game.add.emitter(0, 0, 100);
 
        emitter.gravity = 200;
 cross.addChild(emitter);
-  
+
   //position the emitter relative to the sprite's anchor location
   emitter.y = 0;
   emitter.x = 0;
@@ -497,7 +498,7 @@ leavesign.inputEnabled = true;
    leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
-               if (loadenabled === true) { 
+               if (loadenabled === true) {
 player = game.add.sprite(savex, savey, 'dude');
       Meteor.users.update({
       _id: this.userId
@@ -508,18 +509,18 @@ player = game.add.sprite(savex, savey, 'dude');
       }
     });
 } else
- 
+
 {
 
 player = game.add.sprite(20, 300, 'dude');
 
 }
-               
+
 
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
 		 game.physics.enable(cross, Phaser.Physics.ARCADE);
-		
+
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
@@ -535,12 +536,12 @@ player = game.add.sprite(20, 300, 'dude');
 
 
 
-           update:  function() { 
+           update:  function() {
 
   var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
- var loadenabled = Meteor.user().load;
+
       Meteor.users.update({
       _id: this.userId
     }, {
@@ -560,7 +561,7 @@ player = game.add.sprite(20, 300, 'dude');
   cross.x = input.x;
 
              //  Position the emitter where the mouse/touch event was
- 
+
 
                // game.physics.arcade.collide(player, layer);
               gold=Meteor.user().money;
@@ -571,7 +572,7 @@ player = game.add.sprite(20, 300, 'dude');
                if (cursors.left.isDown)
                {
                    player.body.velocity.x = -150;
-                
+
 
                    if (facing != 'left')
                    {
@@ -582,7 +583,7 @@ player = game.add.sprite(20, 300, 'dude');
                else if (cursors.right.isDown)
                {
                    player.body.velocity.x = 150;
-              
+
 
                    if (facing != 'right')
                    {
@@ -594,7 +595,7 @@ player = game.add.sprite(20, 300, 'dude');
                {
 
 
-                       window.location.href = "https://questgrinders.herokuapp.com/store";
+
 
                }
                else
@@ -619,7 +620,7 @@ player = game.add.sprite(20, 300, 'dude');
                if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
                {
                    player.body.velocity.y = -250;
-                   
+
                    jumpTimer = game.time.now + 750;
                }
 
@@ -654,6 +655,7 @@ player = game.add.sprite(20, 300, 'dude');
                game.load.image('background', 'assets/mapback.png');
                game.load.image('shack', '/assets/shack.png');
                game.load.image('sign', '/assets/fieldsign.png');
+                game.load.image('store', '/assets/storesign.png');
 
 
            },
@@ -668,9 +670,11 @@ player = game.add.sprite(20, 300, 'dude');
                bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
 
                game.physics.arcade.gravity.y = 250;
- fieldsign = game.add.sprite(300, 550, 'sign');
+ fieldsign = game.add.sprite(250, 550, 'sign');
+ storesign = game.add.sprite(600, 500, 'shack');
 
-                             if (loadenabled === true) { 
+
+                             if (loadenabled === true) {
 player = game.add.sprite(savex, savey, 'dude');
       Meteor.users.update({
       _id: this.userId
@@ -681,13 +685,13 @@ player = game.add.sprite(savex, savey, 'dude');
       }
     });
 } else
- 
+
 {
 
 player = game.add.sprite(20, 300, 'dude');
 
 }
-              
+
                game.physics.enable(player, Phaser.Physics.ARCADE);
 
                player.body.bounce.y = 0.2;
@@ -700,7 +704,9 @@ player = game.add.sprite(20, 300, 'dude');
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
              game.camera.follow(player);
              fieldsign.inputEnabled = true;
+                storesign.inputEnabled = true;
              fieldsign.events.onInputDown.add(this.gotofields, this);
+                  storesign.events.onInputDown.add(this.gotostore, this);
            },
 
            gotofields: function(){
@@ -709,12 +715,16 @@ player = game.add.sprite(20, 300, 'dude');
 
            },
 
+            gotostore: function(){
+           window.location.href = '/store'
+         },
+
            update:  function() {
 
   var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
- var loadenabled = Meteor.user().load;
+
 
       Meteor.users.update({
       _id: this.userId
@@ -830,7 +840,7 @@ if (!savey || !savex || !area )
     });
 
 game.state.start('Map');
-} 
+}
 else {
  if (area === "map") {
       Meteor.users.update({
@@ -842,7 +852,7 @@ else {
       }
     });
 game.state.start('Map');
-}  
+}
 else if (area ===  fields)   {
       Meteor.users.update({
       _id: this.userId
@@ -852,7 +862,7 @@ else if (area ===  fields)   {
 
       }
     });
-game.state.start('Fields');       
+game.state.start('Fields');
 
 }
 }
