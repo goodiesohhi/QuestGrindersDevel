@@ -421,13 +421,13 @@ Template.store.helpers({
             var jumpButton;
             var bg;
             var gold;
-            var load = false;
-       var fields =  {
-
-  var area = Meteor.user().area;
+             var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
-  var load = Meteor.user().load;
+  var load = false;
+       var fields =  {
+
+
 
            preload: function() {
 
@@ -497,7 +497,7 @@ leavesign.inputEnabled = true;
    leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
-               if (load === true) { 
+               if (loadenabled === true) { 
 player = game.add.sprite(savex, savey, 'dude');
       Meteor.users.update({
       _id: this.userId
@@ -536,6 +536,11 @@ player = game.add.sprite(20, 300, 'dude');
 
 
            update:  function() { 
+
+  var area = Meteor.user().area;
+  var savex = Meteor.user().savex;
+  var savey = Meteor.user().savey;
+ var loadenabled = Meteor.user().load;
       Meteor.users.update({
       _id: this.userId
     }, {
@@ -642,10 +647,6 @@ player = game.add.sprite(20, 300, 'dude');
 
        var map =  {
 
-  var area = Meteor.user().area;
-  var savex = Meteor.user().savex;
-  var savey = Meteor.user().savey;
- var load = Meteor.user().load;
 
            preload: function() {
 
@@ -669,7 +670,7 @@ player = game.add.sprite(20, 300, 'dude');
                game.physics.arcade.gravity.y = 250;
  fieldsign = game.add.sprite(300, 550, 'sign');
 
-                             if (load === true) { 
+                             if (loadenabled === true) { 
 player = game.add.sprite(savex, savey, 'dude');
       Meteor.users.update({
       _id: this.userId
@@ -709,6 +710,11 @@ player = game.add.sprite(20, 300, 'dude');
            },
 
            update:  function() {
+
+  var area = Meteor.user().area;
+  var savex = Meteor.user().savex;
+  var savey = Meteor.user().savey;
+ var loadenabled = Meteor.user().load;
 
       Meteor.users.update({
       _id: this.userId
