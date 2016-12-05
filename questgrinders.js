@@ -473,13 +473,17 @@ Template.store.helpers({
        game.stage.backgroundColor = 0x337799;
  leavesign = game.add.sprite(300, 550, 'leavesign');
 cross = game.add.sprite(300, 550, 'crosshair');
-       emitter = game.add.emitter(0, 0, 100);
+emitter = game.add.emitter(0, 0, 100);
 
 
        emitter.makeParticles('gold');
 
        emitter.gravity = 200;
-
+cross.addChild(emitter);
+  
+  //position the emitter relative to the sprite's anchor location
+  emitter.y = 0;
+  emitter.x = 0;
 
        game.input.onDown.add(this.particleBurst, this);
               game.world.setBounds(0, 0, 1920, 600);
@@ -504,8 +508,8 @@ player = game.add.sprite(20, 300, 'dude');
 
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
-		game.physics.enable(emitter, Phaser.Physics.ARCADE);
-		game.physics.enable(cross, Phaser.Physics.ARCADE);
+		 game.physics.enable(cross, Phaser.Physics.ARCADE);
+		
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
@@ -521,9 +525,19 @@ player = game.add.sprite(20, 300, 'dude');
 
 
 
-           update:  function() {
+           update:  function() { 
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+        'savey': player.y,
+        'savex': player.x,
+        'area': "fields",
+
+      }
+    });
              //  Position the emitter where the mouse/touch event was
-  game.physics.arcade.moveToPointer(emitter, 4000);
+
 
 //  Position the emitter where the mouse/touch event was
 
@@ -539,8 +553,7 @@ player = game.add.sprite(20, 300, 'dude');
                if (cursors.left.isDown)
                {
                    player.body.velocity.x = -150;
-                    emitter.x = -150;
-                    cross.x = -150;
+                
 
                    if (facing != 'left')
                    {
@@ -551,8 +564,7 @@ player = game.add.sprite(20, 300, 'dude');
                else if (cursors.right.isDown)
                {
                    player.body.velocity.x = 150;
-                   emitter.x = 150;
-                   cross.x = 150;
+              
 
                    if (facing != 'right')
                    {
@@ -589,8 +601,7 @@ player = game.add.sprite(20, 300, 'dude');
                if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
                {
                    player.body.velocity.y = -250;
-                   emitter.x = -150;
-                   cross.x = -150;
+                   
                    jumpTimer = game.time.now + 750;
                }
 
@@ -673,6 +684,17 @@ player = game.add.sprite(20, 300, 'dude');
            },
 
            update:  function() {
+
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+        'savey': player.y,
+        'savex': player.x,
+        'area': "fields",
+
+      }
+    });
 
                // game.physics.arcade.collide(player, layer);
 
