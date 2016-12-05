@@ -494,7 +494,7 @@ leavesign.inputEnabled = true;
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
-               player.body.setSize(40, 125);
+               player.body.setSize(40, 155);
 
 
 
@@ -523,6 +523,8 @@ cross.y = game.input.y
                if (cursors.left.isDown)
                {
                    player.body.velocity.x = -150;
+                    emitter.x = -150;
+                    cross.x = -150;
 
                    if (facing != 'left')
                    {
@@ -533,6 +535,8 @@ cross.y = game.input.y
                else if (cursors.right.isDown)
                {
                    player.body.velocity.x = 150;
+                   emitter.x = 150;
+                   cross.x = 150;
 
                    if (facing != 'right')
                    {
@@ -569,6 +573,8 @@ cross.y = game.input.y
                if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
                {
                    player.body.velocity.y = -250;
+                   emitter.x = -150;
+                   cross.x = -150;
                    jumpTimer = game.time.now + 750;
                }
 
