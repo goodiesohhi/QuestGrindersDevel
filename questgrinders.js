@@ -1605,15 +1605,14 @@ Meteor.methods({
     }, {
 
       $set: {
-        'savex': x
-        'savey': y
-        'area': area
+        'savex': x,
+        'savey': y,
+        'area': area,
       }
 
 
     });
 
-    console.log(avatarvar)
   },
   setbbcode: function(bbcode) {
 
