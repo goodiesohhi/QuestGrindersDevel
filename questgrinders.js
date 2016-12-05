@@ -542,23 +542,14 @@ player = game.add.sprite(20, 300, 'dude');
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
 
-      Meteor.users.update({
-      _id: this.userId
-    }, {
-      $set: {
-        'savey': player.y,
-        'savex': player.x,
-        'area': "fields",
-
-      }
-    });
+Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
              //  Position the emitter where the mouse/touch event was
 
 
 //  Position the emitter where the mouse/touch event was
 
-  cross.y = input.y;
-  cross.x = input.x;
+  cross.y = game.input.y;
+  cross.x = game.input.x;
 
              //  Position the emitter where the mouse/touch event was
 
@@ -670,8 +661,8 @@ player = game.add.sprite(20, 300, 'dude');
                bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
 
                game.physics.arcade.gravity.y = 250;
- fieldsign = game.add.sprite(250, 550, 'sign');
- storesign = game.add.sprite(600, 500, 'shack');
+ fieldsign = game.add.sprite(250, 460, 'sign');
+ storesign = game.add.sprite(600, 430, 'shack');
 
 
                              if (loadenabled === true) {
@@ -726,16 +717,8 @@ player = game.add.sprite(20, 300, 'dude');
   var savey = Meteor.user().savey;
 
 
-      Meteor.users.update({
-      _id: this.userId
-    }, {
-      $set: {
-        'savey': player.y,
-        'savex': player.x,
-        'area': "fields",
+  Meteor.call('updatePosition', player.position.x, player.position.y, "map");
 
-      }
-    });
 
                // game.physics.arcade.collide(player, layer);
 
@@ -1605,6 +1588,26 @@ Meteor.methods({
 
       $set: {
         'avatar2': avatarvar
+      }
+
+
+    });
+
+    console.log(avatarvar)
+  },
+
+
+  updatePosition: function(x,y,area) {
+
+
+    Meteor.users.update({
+      _id: this.userId
+    }, {
+
+      $set: {
+        'savex': x
+        'savey': y
+        'area': area
       }
 
 
