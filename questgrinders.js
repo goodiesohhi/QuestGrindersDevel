@@ -410,9 +410,8 @@ Template.store.helpers({
 
   Template.game.rendered = function(){
     if (!this.rendered) {
-  var area = Meteor.user().area;
-  var savex = Meteor.user().savex;
-  var savey = Meteor.user().savey;
+
+  
       var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'gamediv');
        var emitter;
            var player;
@@ -424,6 +423,11 @@ Template.store.helpers({
             var gold;
             var load = false;
        var fields =  {
+
+  var area = Meteor.user().area;
+  var savex = Meteor.user().savex;
+  var savey = Meteor.user().savey;
+  var load = Meteor.user().load;
 
            preload: function() {
 
@@ -440,7 +444,7 @@ Template.store.helpers({
                       particleBurst: function() {
 
                           //  Position the emitter where the mouse/touch event was
-                       game.physics.arcade.moveToPointer(cross, 4000);
+                  
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -495,7 +499,14 @@ leavesign.inputEnabled = true;
                game.physics.arcade.gravity.y = 250;
                if (load === true) { 
 player = game.add.sprite(savex, savey, 'dude');
-load = false;
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+
+       'load' : false ,
+      }
+    });
 } else
  
 {
@@ -539,6 +550,9 @@ player = game.add.sprite(20, 300, 'dude');
 
 
 //  Position the emitter where the mouse/touch event was
+
+  cross.y = input.y;
+  cross.x = input.x;
 
              //  Position the emitter where the mouse/touch event was
  
@@ -628,6 +642,11 @@ player = game.add.sprite(20, 300, 'dude');
 
        var map =  {
 
+  var area = Meteor.user().area;
+  var savex = Meteor.user().savex;
+  var savey = Meteor.user().savey;
+ var load = Meteor.user().load;
+
            preload: function() {
 
                game.load.image('dude', '/hero.png');
@@ -652,7 +671,14 @@ player = game.add.sprite(20, 300, 'dude');
 
                              if (load === true) { 
 player = game.add.sprite(savex, savey, 'dude');
-load = false;
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+
+       'load' : false ,
+      }
+    });
 } else
  
 {
@@ -793,19 +819,33 @@ if (!savey || !savex || !area )
         'savey': 500,
         'savex': 0,
         'area': "map",
-
+       'load' : true ,
       }
     });
-load =true;
+
 game.state.start('Map');
 } 
 else {
  if (area === "map") {
-load = true;
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+        'load' : true ,
+
+      }
+    });
 game.state.start('Map');
 }  
 else if (area ===  fields)   {
-load = true;
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+        'load' : true ,
+
+      }
+    });
 game.state.start('Fields');       
 
 }
