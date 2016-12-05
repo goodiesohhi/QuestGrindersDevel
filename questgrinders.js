@@ -507,8 +507,8 @@ leavesign.inputEnabled = true;
 
            update:  function() {
              //  Position the emitter where the mouse/touch event was
-            emitter.x = cross.x;
-emitter.y = cross.y;
+            emitter.x = game.input.x
+emitter.y = game.input.y
 
 //  Position the emitter where the mouse/touch event was
 cross.x = game.input.x
