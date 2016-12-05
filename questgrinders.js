@@ -333,7 +333,7 @@ Template.store.helpers({
   Template.navbar.events({
 'click': function() {
        $('#hidebutton').click(function() {
-       if (hiddennav = false) {
+       if (hiddennav === false) {
 
        $("navigation").hide();
      hiddennav = true;
@@ -410,6 +410,9 @@ Template.store.helpers({
 
   Template.game.rendered = function(){
     if (!this.rendered) {
+  var area = Meteor.user().area;
+  var savex = Meteor.user().savex;
+  var savey = Meteor.user().savey;
       var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'gamediv');
        var emitter;
            var player;
@@ -419,6 +422,7 @@ Template.store.helpers({
             var jumpButton;
             var bg;
             var gold;
+            var load = false;
        var fields =  {
 
            preload: function() {
@@ -475,7 +479,7 @@ cross = game.add.sprite(300, 550, 'crosshair');
        emitter.makeParticles('gold');
 
        emitter.gravity = 200;
-    emitter.fixedToCamera = true;
+
 
        game.input.onDown.add(this.particleBurst, this);
               game.world.setBounds(0, 0, 1920, 600);
@@ -486,11 +490,22 @@ leavesign.inputEnabled = true;
    leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
+               if (load === true) { 
+player = game.add.sprite(savex, savey, 'dude');
+load = false;
+} else
+ 
+{
 
-               player = game.add.sprite(20, 32, 'dude');
+player = game.add.sprite(20, 300, 'dude');
+
+}
+               
 
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
+		game.physics.enable(emitter, Phaser.Physics.ARCADE);
+		game.physics.enable(cross, Phaser.Physics.ARCADE);
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
@@ -508,12 +523,13 @@ leavesign.inputEnabled = true;
 
            update:  function() {
              //  Position the emitter where the mouse/touch event was
-            emitter.x = game.input.x
-emitter.y = game.input.y
+  game.physics.arcade.moveToPointer(emitter, 4000);
 
 //  Position the emitter where the mouse/touch event was
-cross.x = game.input.x
-cross.y = game.input.y
+
+             //  Position the emitter where the mouse/touch event was
+  game.physics.arcade.moveToPointer(cross, 4000);
+
                // game.physics.arcade.collide(player, layer);
               gold=Meteor.user().money;
               text.setText("GOLD:" + gold+"G");
@@ -622,9 +638,19 @@ cross.y = game.input.y
                bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
 
                game.physics.arcade.gravity.y = 250;
+ fieldsign = game.add.sprite(300, 550, 'sign');
 
-               player = game.add.sprite(20, 32, 'dude');
-               fieldsign = game.add.sprite(300, 550, 'sign');
+                             if (load === true) { 
+player = game.add.sprite(savex, savey, 'dude');
+load = false;
+} else
+ 
+{
+
+player = game.add.sprite(20, 300, 'dude');
+
+}
+              
                game.physics.enable(player, Phaser.Physics.ARCADE);
 
                player.body.bounce.y = 0.2;
@@ -737,7 +763,32 @@ cross.y = game.input.y
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
-            game.state.start('Map');
+if (!savey || !savex || !area )
+{
+      Meteor.users.update({
+      _id: this.userId
+    }, {
+      $set: {
+        'savey': 500,
+        'savex': 0,
+        'area': "map",
+
+      }
+    });
+load =true;
+game.state.start('Map');
+} 
+else {
+ if (area === "map") {
+load = true;
+game.state.start('Map');
+}  
+else if (area ===  fields)   {
+load = true;
+game.state.start('Fields');       
+
+}
+}
 
       this.rendered = true;
     }
