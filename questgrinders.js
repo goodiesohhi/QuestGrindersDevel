@@ -436,7 +436,8 @@ Template.store.helpers({
                       particleBurst: function() {
 
                           //  Position the emitter where the mouse/touch event was
-
+                          emitter.x = game.input.x
+                          emitter.y = game.input.y
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
