@@ -424,7 +424,7 @@ Template.store.helpers({
              var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
- var loadenabled = Meteor.user().load;
+ var loadenabled=Meteor.user().load;
 
        var fields =  {
 
@@ -526,13 +526,13 @@ player = game.add.sprite(20, 300, 'playersprite' );
 }
 
 player.scale.setTo(0.5,0.5);
-player.animations.add('left', Phaser.Animation.generateFrameNames('left', 5, 8, '', 3), 10, true, false);
-player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, '', 3), 10, true, false);
+player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, '', 3), 10);
+player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4, '', 3), 10);
 
 
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
-		
+
 
 
                player.body.bounce.y = 0.2;
@@ -550,10 +550,10 @@ player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, 
 
 
            update:  function() {
-
-  var area = Meteor.user().area;
-  var savex = Meteor.user().savex;
-  var savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
+ area = Meteor.user().area;
+   savex = Meteor.user().savex;
+ savey = Meteor.user().savey;
 
 Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
              //  Position the emitter where the mouse/touch event was
@@ -606,14 +606,6 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
                    {
                        player.animations.stop();
 
-                       if (facing == 'left')
-                       {
-                           player.frame = 1;
-                       }
-                       else
-                       {
-                           player.frame = 1;
-                       }
 
                        facing = 'idle';
                    }
@@ -658,12 +650,14 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
                game.load.image('shack', '/assets/shack.png');
                game.load.image('sign', '/assets/fieldsign.png');
                 game.load.image('store', '/assets/storesign.png');
+                game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json');
 
 
            },
 
 
            create: function() {
+
               game.world.setBounds(0, 0, 1920, 600);
                 game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -675,9 +669,10 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
  fieldsign = game.add.sprite(250, 460, 'sign');
  storesign = game.add.sprite(600, 430, 'shack');
 
+loadenabled=Meteor.user().load
 
                              if (loadenabled === true) {
-player = game.add.sprite(savex, savey, 'dude');
+player = game.add.sprite(savex, savey, 'playersprite');
       Meteor.users.update({
       _id: this.userId
     }, {
@@ -690,10 +685,10 @@ player = game.add.sprite(savex, savey, 'dude');
 
 {
 
-player = game.add.sprite(20, 300, 'dude');
+player = game.add.sprite(20, 300, 'playersprite');
 
 }
-
+player.scale.setTo(0.5,0.5);
                game.physics.enable(player, Phaser.Physics.ARCADE);
 
                player.body.bounce.y = 0.2;
@@ -701,6 +696,8 @@ player = game.add.sprite(20, 300, 'dude');
                player.body.setSize(150, 300);
 
 
+               player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, '', 3), 10);
+               player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4, '', 3), 10);
 
                cursors = game.input.keyboard.createCursorKeys();
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -723,10 +720,10 @@ player = game.add.sprite(20, 300, 'dude');
 
            update:  function() {
 
-  var area = Meteor.user().area;
-  var savex = Meteor.user().savex;
-  var savey = Meteor.user().savey;
-
+ area = Meteor.user().area;
+savex = Meteor.user().savex;
+ savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
 
   Meteor.call('updatePosition', player.position.x, player.position.y, "map");
 
@@ -763,14 +760,6 @@ player = game.add.sprite(20, 300, 'dude');
                    {
                        player.animations.stop();
 
-                       if (facing == 'left')
-                       {
-                           player.frame = 0;
-                       }
-                       else
-                       {
-                           player.frame = 5;
-                       }
 
                        facing = 'idle';
                    }
@@ -836,7 +825,7 @@ if (!savey || !savex || !area || !loadenabled)
 game.state.start('Map');
 }
 else if (area === "map") {
- 
+
       Meteor.users.update({
       _id: this.userId
     }, {
