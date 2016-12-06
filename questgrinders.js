@@ -432,7 +432,7 @@ Template.store.helpers({
 
            preload: function() {
 
- game.load.atlasJSONHash('playersprite', 'assets\player\weaponless\playerunarmed.png', 'assets\player\weaponless\playerunarmed.json');
+ game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json');
 
                game.load.image('dude', '/hero.png');
                game.load.image('background', '/assets/fieldsback.png');
@@ -820,7 +820,7 @@ player = game.add.sprite(20, 300, 'dude');
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
-if (!savey || !savex || !area )
+if (!savey || !savex || !area || !loadenabled)
 {
       Meteor.users.update({
       _id: this.userId
@@ -835,8 +835,8 @@ if (!savey || !savex || !area )
 
 game.state.start('Map');
 }
-else {
- if (area === "map") {
+else if (area === "map") {
+ 
       Meteor.users.update({
       _id: this.userId
     }, {
@@ -859,7 +859,7 @@ else if (area ===  fields)   {
 game.state.start('Fields');
 
 }
-}
+
 
       this.rendered = true;
     }
