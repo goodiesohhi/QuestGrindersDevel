@@ -485,6 +485,11 @@ emitter = game.add.emitter(0, 0, 100);
        emitter.gravity = 200;
 cross.addChild(emitter);
 
+    game.physics.enable(cross, Phaser.Physics.ARCADE);
+
+    //  Tell it we don't want physics to manage the rotation
+   cross.body.allowRotation = false;
+
   //position the emitter relative to the sprite's anchor location
   emitter.y = 0;
   emitter.x = 0;
@@ -519,7 +524,7 @@ player = game.add.sprite(20, 300, 'dude');
 
 
                game.physics.enable(player, Phaser.Physics.ARCADE);
-		 game.physics.enable(cross, Phaser.Physics.ARCADE);
+		
 
 
                player.body.bounce.y = 0.2;
@@ -545,11 +550,9 @@ player = game.add.sprite(20, 300, 'dude');
 Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
              //  Position the emitter where the mouse/touch event was
 
-
+ cross.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 1000);
 //  Position the emitter where the mouse/touch event was
 
-  cross.y = game.input.y;
-  cross.x = game.input.x;
 
              //  Position the emitter where the mouse/touch event was
 
