@@ -432,6 +432,8 @@ Template.store.helpers({
 
            preload: function() {
 
+ game.load.atlasJSONHash('playersprite', 'assets\player\weaponless\playerunarmed.png', 'assets\player\weaponless\playerunarmed.json');
+
                game.load.image('dude', '/hero.png');
                game.load.image('background', '/assets/fieldsback.png');
                game.load.image('shack', '/assets/shack.png');
@@ -504,7 +506,9 @@ leavesign.inputEnabled = true;
 
                game.physics.arcade.gravity.y = 250;
                if (loadenabled === true) {
-player = game.add.sprite(savex, savey, 'dude');
+
+
+player = game.add.sprite(savex, savey, 'playersprite' );
       Meteor.users.update({
       _id: this.userId
     }, {
@@ -517,9 +521,13 @@ player = game.add.sprite(savex, savey, 'dude');
 
 {
 
-player = game.add.sprite(20, 300, 'dude');
+player = game.add.sprite(20, 300, 'playersprite' );
 
 }
+
+player.scale.setTo(0.5,0.5);
+player.animations.add('left', Phaser.Animation.generateFrameNames('left', 5, 8, '', 3), 10, true, false);
+player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, '', 3), 10, true, false);
 
 
 
@@ -529,7 +537,7 @@ player = game.add.sprite(20, 300, 'dude');
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
-               player.body.setSize(40, 155);
+               player.body.setSize(150, 300);
 
 
 
@@ -550,7 +558,7 @@ player = game.add.sprite(20, 300, 'dude');
 Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
              //  Position the emitter where the mouse/touch event was
 
- cross.rotation = game.physics.arcade.moveToPointer(sprite, 60, game.input.activePointer, 1000);
+ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activePointer, 1000);
 //  Position the emitter where the mouse/touch event was
 
 
@@ -600,11 +608,11 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
 
                        if (facing == 'left')
                        {
-                           player.frame = 0;
+                           player.frame = 1;
                        }
                        else
                        {
-                           player.frame = 5;
+                           player.frame = 1;
                        }
 
                        facing = 'idle';
@@ -690,7 +698,7 @@ player = game.add.sprite(20, 300, 'dude');
 
                player.body.bounce.y = 0.2;
                player.body.collideWorldBounds = true;
-               player.body.setSize(40, 125);
+               player.body.setSize(150, 300);
 
 
 
