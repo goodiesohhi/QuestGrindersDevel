@@ -653,7 +653,7 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
                game.load.image('shack', '/assets/shack.png');
                game.load.image('sign', '/assets/fieldsign.png');
                 game.load.image('store', '/assets/storesign.png');
-              game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+             game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 
 
            },
@@ -700,7 +700,9 @@ player.scale.setTo(0.5,0.5);
 
 
 
-  player.animations.add('right',["1", "2", "3", "4"] , 10, true);
+
+
+player.animations.add('right',["1", "2", "3", "4"] , 10, true);
 player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
@@ -741,9 +743,10 @@ loadenabled=Meteor.user().load
                {
                    player.body.velocity.x = -150;
 
+
                    if (facing != 'left')
                    {
-                   player.animations.play('left');
+                       player.animations.play('left');
                        facing = 'left';
                    }
                }
@@ -751,14 +754,20 @@ loadenabled=Meteor.user().load
                {
                    player.body.velocity.x = 150;
 
+
                    if (facing != 'right')
                    {
                        player.animations.play('right');
                        facing = 'right';
-
                    }
                }
+         else if (cursors.up.isDown )
+               {
 
+
+
+
+               }
                else
                {
                    if (facing != 'idle')
@@ -773,36 +782,9 @@ loadenabled=Meteor.user().load
                if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
                {
                    player.body.velocity.y = -250;
+
                    jumpTimer = game.time.now + 750;
                }
-
-               else if (cursors.up.isDown)
-                     {
-                           if (game.physics.arcade.overlap(player, shack)) {
-
-
-             }
-
-                     }
-                     else
-                     {
-                         if (facing != 'idle')
-                         {
-                             player.animations.stop();
-
-                             if (facing == 'left')
-                             {
-                                 player.frame = 0;
-                             }
-                             else
-                             {
-                                 player.frame = 5;
-                             }
-
-                             facing = 'idle';
-                         }
-                     }
-
            },
 
            render:  function() {
