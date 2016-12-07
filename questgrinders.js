@@ -466,6 +466,11 @@ Template.store.helpers({
                       },
 
            create: function() {
+ area = Meteor.user().area;
+savex = Meteor.user().savex;
+ savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
+
    bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
              text = game.add.text(500, 500, "GOLD", {
                     font: "18px Arial",
@@ -661,6 +666,11 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
 
            create: function() {
 
+ area = Meteor.user().area;
+savex = Meteor.user().savex;
+ savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
+
               game.world.setBounds(0, 0, 1920, 600);
                 game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -670,9 +680,9 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
 
                game.physics.arcade.gravity.y = 250;
  fieldsign = game.add.sprite(250, 460, 'sign');
- storesign = game.add.sprite(600, 430, 'shack');
+ storesign = game.add.sprite(600, 380, 'shack');
 
-loadenabled=Meteor.user().load
+
 
                              if (loadenabled === true) {
 player = game.add.sprite(savex, savey, 'playersprite');
@@ -792,7 +802,10 @@ loadenabled=Meteor.user().load
                game.debug.text(game.time.suggestedFps, 32, 32);
            },
        }
-
+ area = Meteor.user().area;
+savex = Meteor.user().savex;
+ savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
