@@ -528,8 +528,8 @@ player = game.add.sprite(20, 300, 'playersprite' );
 player.scale.setTo(0.5,0.5);
 
 
-player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, ), 10, true);
-player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4), 10 , true);
+player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4,'',0 ), 10, true);
+player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4,'', 0), 10 , true);
 
 
 
@@ -699,8 +699,8 @@ player.scale.setTo(0.5,0.5);
                player.body.setSize(150, 300);
 
 
-               player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4, ), 10, true);
-               player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4), 10 , true);
+  player.animations.add('left', Phaser.Animation.generateFrameNames('left', 1, 4,'',0 ), 10, true);
+player.animations.add('right', Phaser.Animation.generateFrameNames('right', 1, 4,'', 0), 10 , true);
 
                cursors = game.input.keyboard.createCursorKeys();
                jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
