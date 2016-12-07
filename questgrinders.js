@@ -432,7 +432,7 @@ Template.store.helpers({
 
            preload: function() {
 
- game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json');
+ game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 
                game.load.image('dude', '/hero.png');
                game.load.image('background', '/assets/fieldsback.png');
@@ -528,8 +528,8 @@ player = game.add.sprite(20, 300, 'playersprite' );
 player.scale.setTo(0.5,0.5);
 
 
-  player.animations.add('left',["1", "2", "3", "4"] , 10, true);
-player.animations.add('right', ["5", "6", "7", "8"] , 10 , true);
+  player.animations.add('right',["1", "2", "3", "4"] , 10, true);
+player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
 
@@ -653,7 +653,7 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
                game.load.image('shack', '/assets/shack.png');
                game.load.image('sign', '/assets/fieldsign.png');
                 game.load.image('store', '/assets/storesign.png');
-                game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json');
+              game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 
 
            },
@@ -700,8 +700,8 @@ player.scale.setTo(0.5,0.5);
 
 
 
-  player.animations.add('left',["1", "2", "3", "4"] , 10, true);
-player.animations.add('right', ["5", "6", "7", "8"] , 10 , true);
+  player.animations.add('right',["1", "2", "3", "4"] , 10, true);
+player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
                cursors = game.input.keyboard.createCursorKeys();
