@@ -1037,7 +1037,7 @@ loadenabled=Meteor.user().load
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
-if (!Meteor.user().savey; || !Meteor.user().savex; || !Meteor.user().area; || !Meteor.user().load || Meteor.user().connected)
+if (!Meteor.user().savey || !Meteor.user().savex || !Meteor.user().area || !Meteor.user().load || Meteor.user().connected)
 {
       Meteor.users.update({
       _id: this.userId
