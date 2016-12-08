@@ -246,8 +246,12 @@ Cycle:{{keeper.cycle}} Tick:{{keeper.tick}}
 </template>
 
 <template name="game">
+<div align="center" class = "base">
+<p align = "center" id="textbox">
+</p>
+</div>
   {{game}}
-  <div align="center" id="gamediv">
+  <div class="base" align="center" id="gamediv">
 
   </div>
 </template>
@@ -439,11 +443,9 @@ Cycle:{{keeper.cycle}} Tick:{{keeper.tick}}
 <template name="store" >
 
 
-  <div class="jack" align ="center">
-        <a href="/game">Go Back to the Overworld.</a>
-      <a href="/jack"><img src="/shack.png"></a>
-  </div>
-
+  {{#if isHome}}
+             
+          
 <div class="base" align ="center">
 
 
@@ -500,11 +502,14 @@ Cycle:{{keeper.cycle}} Tick:{{keeper.tick}}
 
 
 
+<br>
 
-
-
+ <input type="button" class="exit btn span2" value="Exit Store" /> 
 
 </div>
+  {{/if}}
+
+ 
 
 </template>
 

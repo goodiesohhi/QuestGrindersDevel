@@ -231,6 +231,11 @@ $("#editor").wysibb();
     }).count();
   };
 
+Template.store.helpers({
+    isHome: function(){
+        return Session.get('isHome');
+    }
+});
 
   Template.leaderboards.playernumber = function() {
     return Meteor.users.find({}).count();
@@ -680,7 +685,7 @@ loadenabled=Meteor.user().load
 
                game.physics.arcade.gravity.y = 250;
  fieldsign = game.add.sprite(250, 460, 'sign');
- storesign = game.add.sprite(600, 380, 'shack');
+ storesign = game.add.sprite(600, 325, 'shack');
 
 
 
@@ -732,7 +737,7 @@ player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
            },
 
             gotostore: function(){
-           window.location.href = '/store'
+          Session.set('isHome', true)
          },
 
            update:  function() {
@@ -1207,6 +1212,11 @@ game.state.start('Fields');
   Template.store.events({
     'click input.code': function() {
       Meteor.call('click');
+
+    },
+
+  'click input.exit': function() {
+     Session.set('isHome', false)
 
     }
 
