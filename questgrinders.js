@@ -959,7 +959,7 @@ player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
            gotofields: function(){
 
-              game.state.start('Fields');
+              game.state.start('PVP');
 
            },
 
@@ -1037,6 +1037,7 @@ loadenabled=Meteor.user().load
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
+  game.state.add('PVP', pvp)
 if (!Meteor.user().savey || !Meteor.user().savex || !Meteor.user().area || !Meteor.user().load || Meteor.user().connected)
 {
       Meteor.users.update({
