@@ -325,9 +325,7 @@ Template.store.helpers({
   }
 
 
-  Template.pvp.user = function() {
-    return Meteor.user();
-  }
+
 
  Template.champstore.events({
     'click input.buy': function(event) {
@@ -430,6 +428,235 @@ Template.store.helpers({
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
  var loadenabled=Meteor.user().load;
+ var connectedplayers = Meteor.users.find({ connected : 1 });
+
+ var pvp =  {
+
+
+
+     preload: function() {
+
+game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+
+         game.load.image('dude', '/hero.png');
+         game.load.image('background', '/assets/fieldsback.png');
+         game.load.image('shack', '/assets/shack.png');
+          game.load.image('leavesign', '/assets/leavesign.png');
+ game.load.image('gold', 'assets/gold.png');
+ game.load.image('crosshair', 'assets/crosshair.png');
+
+     },
+
+
+                particleBurst: function() {
+
+                    //  Position the emitter where the mouse/touch event was
+
+
+                    //  The first parameter sets the effect to "explode" which means all particles are emitted at once
+                    //  The second gives each particle a 2000ms lifespan
+                    //  The third is ignored when using burst/explode mode
+                    //  The final parameter (10) is how many particles will be emitted in this single burst
+                    emitter.start(true, 2000, null, 5);
+                Meteor.call('click');
+
+                },
+
+              leave: function() {
+
+                      game.state.start('Map');
+
+
+                },
+
+     create: function() {
+area = Meteor.user().area;
+savex = Meteor.user().savex;
+savey = Meteor.user().savey;
+loadenabled=Meteor.user().load
+
+bg = game.add.tileSprite(0, 0, 1920, 600, 'background');
+       text = game.add.text(500, 500, "GOLD", {
+              font: "18px Arial",
+              fill: "#ff0044",
+              align: "right"
+          });
+
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+
+ game.stage.backgroundColor = 0x337799;
+leavesign = game.add.sprite(300, 550, 'leavesign');
+cross = game.add.sprite(300, 550, 'crosshair');
+emitter = game.add.emitter(0, 0, 100);
+
+
+ emitter.makeParticles('gold');
+
+ emitter.gravity = 200;
+cross.addChild(emitter);
+
+game.physics.enable(cross, Phaser.Physics.ARCADE);
+
+//  Tell it we don't want physics to manage the rotation
+cross.body.allowRotation = false;
+
+//position the emitter relative to the sprite's anchor location
+emitter.y = 0;
+emitter.x = 0;
+
+ game.input.onDown.add(this.particleBurst, this);
+        game.world.setBounds(0, 0, 1920, 600);
+          game.physics.startSystem(Phaser.Physics.ARCADE);
+
+         game.time.desiredFps = 30;
+leavesign.inputEnabled = true;
+leavesign.events.onInputDown.add(this.leave, this);
+
+         game.physics.arcade.gravity.y = 250;
+
+connectedplayers.forEach(function() {
+
+   window['player' + this.userId ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
+});
+
+
+thisplayer = "player"+this.userId
+
+Meteor.users.update({
+_id: this.userId
+}, {
+$set: {
+
+ 'connected' : 2 ,
+}
+});
+
+
+
+player.scale.setTo(0.5,0.5);
+
+
+player.animations.add('right',["1", "2", "3", "4"] , 10, true);
+player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
+
+
+
+         game.physics.enable(player, Phaser.Physics.ARCADE);
+
+
+
+         player.body.bounce.y = 0.2;
+         player.body.collideWorldBounds = true;
+         player.body.setSize(150, 300);
+
+
+
+         cursors = game.input.keyboard.createCursorKeys();
+         jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+       game.camera.follow(player);
+     },
+
+
+
+
+     update:  function() {
+loadenabled=Meteor.user().load
+area = Meteor.user().area;
+savex = Meteor.user().savex;
+savey = Meteor.user().savey;
+
+Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
+connectedplayers = Meteor.users.find({ connected : 1 });
+
+connectedplayers.forEach(function() {
+
+   window['player' + this.userId ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
+});       //  Position the emitter where the mouse/touch event was
+
+cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activePointer, 1000);
+//  Position the emitter where the mouse/touch event was
+
+
+       //  Position the emitter where the mouse/touch event was
+
+
+         // game.physics.arcade.collide(player, layer);
+        gold=Meteor.user().money;
+
+        text.setText("GOLD:" + gold+"G");
+
+         player.body.velocity.x = 0;
+
+         if (cursors.left.isDown)
+         {
+             player.body.velocity.x = -150;
+
+
+             if (facing != 'left')
+             {
+                 player.animations.play('left');
+                 facing = 'left';
+             }
+         }
+         else if (cursors.right.isDown)
+         {
+             player.body.velocity.x = 150;
+
+
+             if (facing != 'right')
+             {
+                 player.animations.play('right');
+                 facing = 'right';
+             }
+         }
+   else if (cursors.up.isDown )
+         {
+
+
+
+
+         }
+         else
+         {
+             if (facing != 'idle')
+             {
+                 player.animations.stop();
+
+
+                 facing = 'idle';
+             }
+         }
+
+         if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
+         {
+             player.body.velocity.y = -250;
+
+             jumpTimer = game.time.now + 750;
+         }
+
+     },
+
+     render:  function() {
+
+         game.debug.text(game.time.suggestedFps, 32, 32);
+
+         // game.debug.text(game.time.physicsElapsed, 32, 32);
+         // game.debug.body(player);
+         // game.debug.bodyInfo(player, 16, 24);
+
+
+
+
+
+
+
+     },
+
+
+ }
+
+
 
        var fields =  {
 
@@ -807,14 +1034,10 @@ loadenabled=Meteor.user().load
                game.debug.text(game.time.suggestedFps, 32, 32);
            },
        }
- area = Meteor.user().area;
-savex = Meteor.user().savex;
- savey = Meteor.user().savey;
-loadenabled=Meteor.user().load
 
            game.state.add('Map', map)
        game.state.add('Fields', fields)
-if (!savey || !savex || !area || !loadenabled)
+if (!Meteor.user().savey; || !Meteor.user().savex; || !Meteor.user().area; || !Meteor.user().load || Meteor.user().connected)
 {
       Meteor.users.update({
       _id: this.userId
@@ -824,6 +1047,7 @@ if (!savey || !savex || !area || !loadenabled)
         'savex': 0,
         'area': "map",
        'load' : true ,
+       'connected' : 1,
       }
     });
 
@@ -1136,20 +1360,6 @@ game.state.start('Fields');
 
 
 
-  Template.pvp.events({
-
-    'submit': function(event) {
-      event.preventDefault(); //prevent page refresh
-
-
-
-      var target = event.target.victim.value;
-
-
-      alert("Attacked!");
-      Meteor.call('attack', target);
-    }
-  });
 
 
 
@@ -1301,7 +1511,14 @@ if (Meteor.isServer) {
 
 
 
+  Meteor.users.update({
+  "status.online": false
+}, {
+  $set: {
 
+   'connected' : 0,
+  }
+});
 
 
   Meteor.publish("userStatus", function() {
