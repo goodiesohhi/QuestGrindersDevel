@@ -534,27 +534,27 @@ $set: {
 
 
 
-player.scale.setTo(0.5,0.5);
+ window['player' + this.userId ].scale.setTo(0.5,0.5);
 
 
-player.animations.add('right',["1", "2", "3", "4"] , 10, true);
-player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
-
-
-
-         game.physics.enable(player, Phaser.Physics.ARCADE);
+ window['player' + this.userId ].animations.add('right',["1", "2", "3", "4"] , 10, true);
+ window['player' + this.userId ].animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
 
-         player.body.bounce.y = 0.2;
-         player.body.collideWorldBounds = true;
-         player.body.setSize(150, 300);
+         game.physics.enable( window['player' + this.userId ], Phaser.Physics.ARCADE);
+
+
+
+          window['player' + this.userId ].body.bounce.y = 0.2;
+          window['player' + this.userId ].body.collideWorldBounds = true;
+          window['player' + this.userId ].body.setSize(150, 300);
 
 
 
          cursors = game.input.keyboard.createCursorKeys();
          jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-       game.camera.follow(player);
+       game.camera.follow( window['player' + this.userId ]);
      },
 
 
@@ -571,7 +571,7 @@ connectedplayers = Meteor.users.find({ connected : 1 });
 
 connectedplayers.forEach(function() {
 
-   window['player' + this.userId ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
+   window['player' + Meteor.user().userId ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
 });       //  Position the emitter where the mouse/touch event was
 
 cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activePointer, 1000);
@@ -586,27 +586,27 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
 
         text.setText("GOLD:" + gold+"G");
 
-         player.body.velocity.x = 0;
+          window['player' + this.userId ].body.velocity.x = 0;
 
          if (cursors.left.isDown)
          {
-             player.body.velocity.x = -150;
+             window['player' + this.userId ].body.velocity.x = -150;
 
 
              if (facing != 'left')
              {
-                 player.animations.play('left');
+                 window['player' + this.userId ].animations.play('left');
                  facing = 'left';
              }
          }
          else if (cursors.right.isDown)
          {
-             player.body.velocity.x = 150;
+             window['player' + this.userId ].body.velocity.x = 150;
 
 
              if (facing != 'right')
              {
-                 player.animations.play('right');
+               window['player' + this.userId ].animations.play('right');
                  facing = 'right';
              }
          }
@@ -621,7 +621,7 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
          {
              if (facing != 'idle')
              {
-                 player.animations.stop();
+                  window['player' + this.userId ].animations.stop();
 
 
                  facing = 'idle';
@@ -630,7 +630,7 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
 
          if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
          {
-             player.body.velocity.y = -250;
+           window['player' + this.userId ].body.velocity.y = -250;
 
              jumpTimer = game.time.now + 750;
          }
@@ -1062,6 +1062,7 @@ else if (area === "map") {
       $set: {
         'load' : true ,
 
+
       }
     });
 game.state.start('Map');
@@ -1072,7 +1073,7 @@ else if (area ===  fields)   {
     }, {
       $set: {
         'load' : true ,
-
+'connected' : 1,
       }
     });
 game.state.start('Fields');
