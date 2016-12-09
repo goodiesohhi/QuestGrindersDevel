@@ -429,6 +429,7 @@ Template.store.helpers({
   var savey = Meteor.user().savey;
  var loadenabled=Meteor.user().load;
  var connectedplayers = Meteor.users.find({ connected : 1 });
+ var thisid = Meteor.user().userId;
 
  var pvp =  {
 
@@ -515,13 +516,10 @@ leavesign.events.onInputDown.add(this.leave, this);
 
          game.physics.arcade.gravity.y = 250;
 
-connectedplayers.forEach(function() {
-
-   window['player' + this.userId ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
-});
+window['player' + thisid ] = game.add.sprite(Meteor.user().savex, Meteor.user().savey, 'playersprite' );
 
 
-thisplayer = "player"+this.userId
+window['player' + thisid ] = "player"+thisid
 
 Meteor.users.update({
 _id: this.userId
@@ -534,27 +532,27 @@ $set: {
 
 
 
- window['player' + this.userId ].scale.setTo(0.5,0.5);
+ window['player' + thisid ].scale.setTo(0.5,0.5);
 
 
- window['player' + this.userId ].animations.add('right',["1", "2", "3", "4"] , 10, true);
- window['player' + this.userId ].animations.add('left', ["5", "6", "7", "8"] , 10 , true);
-
-
-
-         game.physics.enable( window['player' + this.userId ], Phaser.Physics.ARCADE);
+ window['player' + thisid ].animations.add('right',["1", "2", "3", "4"] , 10, true);
+ window['player' + thisid ].animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
 
-          window['player' + this.userId ].body.bounce.y = 0.2;
-          window['player' + this.userId ].body.collideWorldBounds = true;
-          window['player' + this.userId ].body.setSize(150, 300);
+         game.physics.enable( window['player' + thisid ], Phaser.Physics.ARCADE);
+
+
+
+          window['player' + thisid ].body.bounce.y = 0.2;
+          window['player' + thisid ].body.collideWorldBounds = true;
+          window['player' + thisid ].body.setSize(150, 300);
 
 
 
          cursors = game.input.keyboard.createCursorKeys();
          jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-       game.camera.follow( window['player' + this.userId ]);
+       game.camera.follow( window['player' + thisid ]);
      },
 
 
@@ -586,27 +584,27 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
 
         text.setText("GOLD:" + gold+"G");
 
-          window['player' + this.userId ].body.velocity.x = 0;
+          window['player' + thisid ].body.velocity.x = 0;
 
          if (cursors.left.isDown)
          {
-             window['player' + this.userId ].body.velocity.x = -150;
+             window['player' + thisid ].body.velocity.x = -150;
 
 
              if (facing != 'left')
              {
-                 window['player' + this.userId ].animations.play('left');
+                 window['player' + thisid ].animations.play('left');
                  facing = 'left';
              }
          }
          else if (cursors.right.isDown)
          {
-             window['player' + this.userId ].body.velocity.x = 150;
+             window['player' + thisid ].body.velocity.x = 150;
 
 
              if (facing != 'right')
              {
-               window['player' + this.userId ].animations.play('right');
+               window['player' + thisid ].animations.play('right');
                  facing = 'right';
              }
          }
@@ -621,7 +619,7 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
          {
              if (facing != 'idle')
              {
-                  window['player' + this.userId ].animations.stop();
+                  window['player' + thisid ].animations.stop();
 
 
                  facing = 'idle';
@@ -630,7 +628,7 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
 
          if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
          {
-           window['player' + this.userId ].body.velocity.y = -250;
+           window['player' + thisid ].body.velocity.y = -250;
 
              jumpTimer = game.time.now + 750;
          }
