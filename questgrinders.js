@@ -662,8 +662,8 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
 
            preload: function() {
 
- game.load.atlasJSONHash('playersprite', 'assets/player/weaponless/playerunarmed.png', 'assets/player/weaponless/playerunarmed.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
-
+  game.load.atlasJSONHash('playersprite', 'assets/player/armed/player.png', 'assets/player/armed/player.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+  game.load.image('sword','assets/player/weps/sword.png')
                game.load.image('dude', '/hero.png');
                game.load.image('background', '/assets/fieldsback.png');
                game.load.image('shack', '/assets/shack.png');
@@ -677,7 +677,7 @@ cross.rotation = game.physics.arcade.moveToPointer(cross, 60, game.input.activeP
                       particleBurst: function() {
 
                           //  Position the emitter where the mouse/touch event was
-
+  sword.angle = 40;
 
                           //  The first parameter sets the effect to "explode" which means all particles are emitted at once
                           //  The second gives each particle a 2000ms lifespan
@@ -740,26 +740,19 @@ leavesign.inputEnabled = true;
    leavesign.events.onInputDown.add(this.leave, this);
 
                game.physics.arcade.gravity.y = 250;
-               if (loadenabled === true) {
-
-
-player = game.add.sprite(savex, savey, 'playersprite' );
-      Meteor.users.update({
-      _id: this.userId
-    }, {
-      $set: {
-
-       'load' : false ,
-      }
-    });
-} else
-
-{
-
 player = game.add.sprite(20, 300, 'playersprite' );
+sword = game.add.sprite(20, 300, 'sword' );
+player.addChild(sword)
 
-}
+    game.physics.enable(sword, Phaser.Physics.ARCADE);
 
+sword.x=72;
+sword.y=120;
+    sword.gravity = 0;
+  
+  sword.body.moves = false;
+  sword.anchor.x = 0.1;
+        sword.anchor.y = 0.3;
 player.scale.setTo(0.5,0.5);
 
 
@@ -787,6 +780,11 @@ player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
 
            update:  function() {
+ if (sword.angle > -55){
+               sword.angle -= 5;
+
+               }
+
 loadenabled=Meteor.user().load
  area = Meteor.user().area;
    savex = Meteor.user().savex;
@@ -809,14 +807,20 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
 
                player.body.velocity.x = 0;
 
-               if (cursors.left.isDown)
+              if (cursors.left.isDown)
                {
                    player.body.velocity.x = -150;
-
+                   if (face !='left')
+                   {
+                      sword.scale.x *= -1;
+                      sword.x=78;
+                      face = 'left';
+                   }
 
                    if (facing != 'left')
                    {
                        player.animations.play('left');
+
                        facing = 'left';
                    }
                }
@@ -824,10 +828,17 @@ Meteor.call('updatePosition', player.position.x, player.position.y, "fields");
                {
                    player.body.velocity.x = 150;
 
-
+                   if (face !='right')
+                   {
+                     sword.x=72;
+                      sword.scale.x *= -1;
+                      face = 'right';
+                   }
                    if (facing != 'right')
                    {
+
                        player.animations.play('right');
+
                        facing = 'right';
                    }
                }
@@ -957,7 +968,7 @@ player.animations.add('left', ["5", "6", "7", "8"] , 10 , true);
 
            gotofields: function(){
 
-              game.state.start('PVP');
+              game.state.start('Fields');
 
            },
 
