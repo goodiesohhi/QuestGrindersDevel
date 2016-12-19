@@ -424,6 +424,7 @@ Template.store.helpers({
             var jumpButton;
             var bg;
             var gold;
+            var face = 'right';
              var area = Meteor.user().area;
   var savex = Meteor.user().savex;
   var savey = Meteor.user().savey;
